@@ -1,0 +1,115 @@
+#+LaTeX_CLASS: beamer
+#+MACRO: BEAMERMODE presentation
+#+MACRO: BEAMERTHEME Antibes
+
+#+MACRO: BEAMERCOLORTHEME lily
+#+MACRO: BEAMERSUBJECT RMRF
+#+MACRO: BEAMERINSTITUTE Miskatonic University, Astrology Dept.
+#+TITLE:     RSpec_in_example.org
+#+AUTHOR:    mikhail
+#+DATE:      2012-01-13 Пт.
+
+* RSpec на примерах
+** О чем вообще
+*** Что такое RSpec
+*** Начало работы
+*** Организация спеков
+*** Примеры тестов: Rails, Sinatra, Все что нужно
+*** Немного теории тестирования
+** Установка
+*** gem install rspec
+*** mkdir spec
+*** <тесты> -> spec/some_spec.rb
+** Запуск
+*** rspec --color --format doc [files|dirs]
+*** Ключи можно кинуть в файл .rspec
+*** Запуск по имени примера
+    rspec -e 'able'
+*** Еще можно:
+**** запускать по тегам
+**** измерять время
+**** до первой ошибки...
+** Организация файлов
+*** <project>/spec/
+*** <project>/spec/spec_helper.rb
+*** <project>/spec/support/
+** Терминология
+*** Suite
+*** Spec
+*** Example
+** Структура спеков
+*** describe & context
+*** it & example
+*** Пример human.rb, human_spec.rb
+** Matchers
+*** should & should_not
+**** value.should be == 3
+**** value.should_not be_kind_of String
+*** true'шность
+**** should be_true
+*** equal
+**** "abc".should eql "abc"
+**** "abc".should_not equal "abc"
+*** exceptions
+**** expect {...}.not_to raise_error(SomeErrorClass)
+*** operators
+**** value.should be > 0
+** Helpers
+*** Let & Let!
+**** let(:count){Time.now + 4}
+*** Before, After, Around
+    around(:all) do |example|
+      @time = Time.now
+      example.run
+      puts Time.now - @time
+    end
+**** :each - перед каждым примером
+**** :all - перед спеком
+**** :suite - перед всеми спеками
+** Тупо код
+*** Пример just_a_spec.rb
+** TDD
+*** Ставим задачу
+*** Пишем тест
+*** Запускаем тест
+*** Тесты - красные
+*** Код
+*** Запускаем тесты
+*** Тесты - зеленые
+** Пример space_ship.rb
+*** Новая функциональность (tdd)
+*** Разбор space_ship_spec.rb
+** Rails
+*** rspec-rails
+*** Используем генераторы
+*** Разделяем логику и модели
+*** Webrat, capybara, selenium
+** Sinatra
+*** Sinatra + Rack + RackTest + Rspec
+*** Можно писать с использованием Sinatra::Base
+*** Разделяем логику и модели 2
+** Mock & Stub
+*** Test Double
+*** Dummy - занимаем место
+*** Fake  - подменяем функциональность
+*** Mock  - ожидаем вызова
+*** Stub  - подменяем вызов
+*** Пример из space_ship_spec.rb
+*** Пример из bind9mgr
+** Что вообще тестировать
+*** Тестим не код, а поведение
+*** Тестим то, что хотим получить
+*** Тестим то, что неизвестно как работает
+*** Тестим чужие либы - изучаем
+** Как тестировать
+*** 1 тест - 1 фитча... почти
+*** Инициализация, действия, тестирование, откат
+*** Тест должен быть максимально коротким
+*** В тесте не должно быть "кода"
+*** Тесты никто не запускает - Автоматизируй!
+** Конец
+*** Спасибо!
+*** https://www.relishapp.com/rspec
+*** http://guides.rubyonrails.org
+*** http://sinatrarb.com
+*** https://www.relishapp.com/rspec
